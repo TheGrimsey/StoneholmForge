@@ -3,7 +3,7 @@
     license="MIT"
 
     [[mods]]
-      modId="stoneholmforge"
+      modId="stoneholm"
       version="1.0.0"
       displayName="Stoneholm"
       authors="TheGrimsey"
@@ -11,14 +11,14 @@
         Do you love villages? Ever wonder why no villagers have decided to settle underground in some sort of inhabited Stronghold? Well, you can stop wondering because now they do.
         '''
 
-      [[dependencies.examplemod]]
+      [[dependencies.stoneholm]]
         modId="forge"
         mandatory=true
         versionRange="[34,)"
         ordering="NONE"
         side="BOTH"
 
-      [[dependencies.examplemod]]
+      [[dependencies.stoneholm]]
         modId="minecraft"
         mandatory=true
         versionRange="[1.16.5]"

@@ -1,0 +1,142 @@
+{
+  "name": "stoneholm:point_of_interest",
+  "fallback": "stoneholm:end",
+  "elements": [
+    {
+      "weight": 80,
+      "element": {
+        "location": "stoneholm:abandoned_poi/cell_block_4x",
+        "processors": "stoneholm:super_decayer",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 80,
+      "element": {
+        "location": "stoneholm:abandoned_poi/bedroom",
+        "processors": "stoneholm:super_decayer",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 80,
+      "element": {
+        "location": "stoneholm:poi/carpet_room",
+        "processors": "stoneholm:super_decayer",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 80,
+      "element": {
+        "location": "stoneholm:poi/farm_01",
+        "processors": "stoneholm:super_decayer",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 80,
+      "element": {
+        "location": "stoneholm:poi/mason_01",
+        "processors": "stoneholm:super_decayer",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 80,
+      "element": {
+        "location": "stoneholm:poi/armorsmith_01",
+        "processors": "stoneholm:super_decayer",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 80,
+      "element": {
+        "location": "stoneholm:poi/toolsmith_01",
+        "processors": "stoneholm:super_decayer",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 80,
+      "element": {
+        "location": "stoneholm:poi/fisher_01",
+        "processors": "stoneholm:super_decayer",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 80,
+      "element": {
+        "location": "stoneholm:poi/crypt",
+        "processors": "stoneholm:crypter",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 30,
+      "element": {
+        "location": "stoneholm:poi/unfinished_corridor",
+        "processors": "stoneholm:super_decayer",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+
+    {
+      "weight": 4,
+      "element": {
+        "location": "stoneholm:poi/treasures/king_mooshroom",
+        "processors": "stoneholm:super_decayer",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 5,
+      "element": {
+        "location": "stoneholm:poi/treasures/forbidden_knowledge",
+        "processors": "stoneholm:super_decayer",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 5,
+      "element": {
+        "location": "stoneholm:poi/treasures/emerald_vault",
+        "processors": "stoneholm:super_decayer",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 5,
+      "element": {
+        "location": "stoneholm:poi/treasures/villager_head",
+        "processors": "stoneholm:super_decayer",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "location": "stoneholm:poi/treasures/the_button_room",
+        "processors": "stoneholm:super_decayer",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}
