@@ -17,11 +17,10 @@ import java.util.Map;
 public class SHStructures {
     public static final DeferredRegister<Structure<?>> STRUCTURE_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, Stoneholm.MODID);
 
-    public static final RegistryObject<Structure<NoFeatureConfig>> UNDERGROUND_VILLAGE= STRUCTURE_DEFERRED_REGISTER.register("underground_village", () -> new UnderGroundVillageStructure(NoFeatureConfig.CODEC));
+    public static final RegistryObject<Structure<NoFeatureConfig>> UNDERGROUND_VILLAGE = STRUCTURE_DEFERRED_REGISTER.register("underground_village", () -> new UnderGroundVillageStructure(NoFeatureConfig.CODEC));
 
-    public static void registerStructureFeatures()
-    {
-        StructureSeparationSettings structureConfig = new StructureSeparationSettings(Stoneholm.CONFIG.VILLAGE_MAX_DISTANCE, Stoneholm.CONFIG.VILLAGE_MIN_DISTANCE, 8699777);
+    public static void registerStructureFeatures() {
+        StructureSeparationSettings structureConfig = new StructureSeparationSettings(Stoneholm.CONFIG.VILLAGE_SPACING, Stoneholm.CONFIG.VILLAGE_SEPARATION, 8699777);
         Structure.STRUCTURES_REGISTRY.put(UNDERGROUND_VILLAGE.get().getRegistryName().toString(), UNDERGROUND_VILLAGE.get());
 
         DimensionStructuresSettings.DEFAULTS = ImmutableMap.<Structure<?>, StructureSeparationSettings>builder()
@@ -32,12 +31,11 @@ public class SHStructures {
         WorldGenRegistries.NOISE_GENERATOR_SETTINGS.forEach(settings -> {
             Map<Structure<?>, StructureSeparationSettings> structureMap = settings.structureSettings().structureConfig;
 
-            if(structureMap instanceof ImmutableMap){
+            if (structureMap instanceof ImmutableMap) {
                 Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(structureMap);
                 tempMap.put(UNDERGROUND_VILLAGE.get(), structureConfig);
                 settings.structureSettings().structureConfig = tempMap;
-            }
-            else{
+            } else {
                 structureMap.put(UNDERGROUND_VILLAGE.get(), structureConfig);
             }
         });

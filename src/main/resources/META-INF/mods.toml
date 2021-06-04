@@ -14,20 +14,20 @@
       [[dependencies.stoneholm]]
         modId="forge"
         mandatory=true
-        versionRange="[33,)"
+        versionRange="[33,36]"
         ordering="NONE"
         side="BOTH"
 
       [[dependencies.stoneholm]]
         modId="minecraft"
         mandatory=true
-        versionRange="[1.16.2,)"
+        versionRange="[1.16.2,1.16.5]"
         ordering="NONE"
         side="BOTH"
         
       [[dependencies.stoneholm]]
         modId="cloth-config"
         mandatory=true
-        versionRange="[4.11.19,)"
+        versionRange="[4.1,)"
         ordering="NONE"
         side="BOTH"

@@ -1,35 +1,28 @@
 package net.thegrimsey.stoneholm;
 
 import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
+import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.settings.StructureSeparationSettings;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-import javax.security.auth.login.Configuration;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Mod(Stoneholm.MODID)
-public class Stoneholm
-{
+public class Stoneholm {
     public static final String MODID = "stoneholm";
     public static final HashSet<Biome.Category> SPAWNABLE_BIOME_CATEGORIES =
             Stream.of(Biome.Category.FOREST, Biome.Category.JUNGLE, Biome.Category.DESERT, Biome.Category.PLAINS, Biome.Category.SAVANNA).collect(Collectors.toCollection(HashSet::new));
@@ -38,7 +31,7 @@ public class Stoneholm
 
     public Stoneholm() {
         // Register config file.
-        AutoConfig.register(SHConfig.class, Toml4jConfigSerializer::new);
+        AutoConfig.register(SHConfig.class, JanksonConfigSerializer::new);
         // Get config.
         CONFIG = AutoConfig.getConfigHolder(SHConfig.class).getConfig();
 
@@ -52,10 +45,12 @@ public class Stoneholm
 
         // The comments for BiomeLoadingEvent and StructureSpawnListGatherEvent says to do HIGH for additions.
         forgeBus.addListener(EventPriority.HIGH, this::biomeModification);
+
+        if (CONFIG.disableVanillaVillages)
+            forgeBus.addListener(EventPriority.NORMAL, this::removeVanillaVillages);
     }
 
-    private void setup(final FMLCommonSetupEvent event)
-    {
+    void setup(final FMLCommonSetupEvent event) {
         // Queue our structure registration to be done.
         event.enqueueWork(() -> {
             SHStructures.registerStructureFeatures();
@@ -63,9 +58,19 @@ public class Stoneholm
         });
     }
 
-    public void biomeModification(final BiomeLoadingEvent event) {
+    void biomeModification(final BiomeLoadingEvent event) {
         // Only register structure if biome is of the an acceptable category.
-        if(SPAWNABLE_BIOME_CATEGORIES.contains(event.getCategory()))
+        if (SPAWNABLE_BIOME_CATEGORIES.contains(event.getCategory()))
             event.getGeneration().getStructures().add(() -> SHConfiguredStructures.CONFIGURED_UNDERGROUND_VILLAGE);
+    }
+
+    void removeVanillaVillages(final WorldEvent.Load event) {
+        if (event.getWorld() instanceof ServerWorld) {
+            ServerWorld serverWorld = (ServerWorld) event.getWorld();
+
+            Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(serverWorld.getChunkSource().generator.getSettings().structureConfig());
+            tempMap.keySet().remove(Structure.VILLAGE);
+            serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
+        }
     }
 }

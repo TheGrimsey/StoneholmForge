@@ -66,7 +66,7 @@ public class UnderGroundVillageStructure extends Structure<NoFeatureConfig> {
             // Position, we don't care about Y as we will just be placed on top on the terrain.
             BlockPos blockPos = new BlockPos(x, 0, z);
 
-            if(structurePoolFeatureConfig == null)
+            if (structurePoolFeatureConfig == null)
                 structurePoolFeatureConfig = new VillageConfig(() -> registryManager.registry(Registry.TEMPLATE_POOL_REGISTRY).get().get(START_POOL), Stoneholm.CONFIG.VILLAGE_SIZE);
 
             JigsawManager.addPieces(registryManager, structurePoolFeatureConfig, AbstractVillagePiece::new, chunkGenerator, structureManager, blockPos, this.pieces, this.random, false, true);
