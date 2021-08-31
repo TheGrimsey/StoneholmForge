@@ -2,10 +2,10 @@ package net.thegrimsey.stoneholm;
 
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.settings.StructureSeparationSettings;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.WorldEvent;
@@ -24,8 +24,8 @@ import java.util.stream.Stream;
 @Mod(Stoneholm.MODID)
 public class Stoneholm {
     public static final String MODID = "stoneholm";
-    public static final HashSet<Biome.Category> SPAWNABLE_BIOME_CATEGORIES =
-            Stream.of(Biome.Category.FOREST, Biome.Category.JUNGLE, Biome.Category.DESERT, Biome.Category.PLAINS, Biome.Category.SAVANNA).collect(Collectors.toCollection(HashSet::new));
+    public static final HashSet<Biome.BiomeCategory> SPAWNABLE_BIOME_CATEGORIES =
+            Stream.of(Biome.BiomeCategory.FOREST, Biome.BiomeCategory.JUNGLE, Biome.BiomeCategory.DESERT, Biome.BiomeCategory.PLAINS, Biome.BiomeCategory.SAVANNA).collect(Collectors.toCollection(HashSet::new));
 
     public static SHConfig CONFIG;
 
@@ -65,12 +65,11 @@ public class Stoneholm {
     }
 
     void removeVanillaVillages(final WorldEvent.Load event) {
-        if (event.getWorld() instanceof ServerWorld) {
-            ServerWorld serverWorld = (ServerWorld) event.getWorld();
+        if (event.getWorld() instanceof ServerLevel serverLevel) {
 
-            Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(serverWorld.getChunkSource().generator.getSettings().structureConfig());
-            tempMap.keySet().remove(Structure.VILLAGE);
-            serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
+            Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap = new HashMap<>(serverLevel.getChunkSource().generator.getSettings().structureConfig());
+            tempMap.keySet().remove(StructureFeature.VILLAGE);
+            serverLevel.getChunkSource().generator.getSettings().structureConfig = tempMap;
         }
     }
 }
