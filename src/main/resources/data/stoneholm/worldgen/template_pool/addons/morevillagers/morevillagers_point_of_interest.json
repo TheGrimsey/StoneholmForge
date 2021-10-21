@@ -1,65 +1,65 @@
 {
-  "name": "stoneholm:deco_blocks",
-  "fallback": "minecraft:empty",
+  "name": "stoneholm:addons/morevillagers/morevillagers_point_of_interest",
+  "fallback": "stoneholm:end",
   "elements": [
     {
-      "weight": 70,
+      "weight": 30,
       "element": {
-        "location": "stoneholm:decorations/empty",
+        "location": "stoneholm:addons/morevillagers/poi/blueprint",
         "processors": "stoneholm:decayer",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 5,
+      "weight": 30,
       "element": {
-        "location": "stoneholm:decorations/door",
+        "location": "stoneholm:addons/morevillagers/poi/decayed",
+        "processors": "stoneholm:netherer",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 30,
+      "element": {
+        "location": "stoneholm:addons/morevillagers/poi/forestry",
         "processors": "stoneholm:decayer",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 1,
+      "weight": 30,
       "element": {
-        "location": "stoneholm:decorations/chest",
+        "location": "stoneholm:addons/morevillagers/poi/gardener",
+        "processors": "stoneholm:overgrower",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 30,
+      "element": {
+        "location": "stoneholm:addons/morevillagers/poi/hunting",
         "processors": "stoneholm:decayer",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 5,
+      "weight": 30,
       "element": {
-        "location": "stoneholm:decorations/gate",
+        "location": "stoneholm:addons/morevillagers/poi/oceanography",
         "processors": "stoneholm:decayer",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 5,
+      "weight": 30,
       "element": {
-        "location": "stoneholm:decorations/iron_gate",
-        "processors": "stoneholm:decayer",
-        "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "location": "stoneholm:decorations/iron_doors",
-        "processors": "stoneholm:decayer",
-        "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
-      }
-    },
-    {
-      "weight": 5,
-      "element": {
-        "location": "stoneholm:decorations/arch",
+        "location": "stoneholm:addons/morevillagers/poi/purpur",
         "processors": "stoneholm:decayer",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"

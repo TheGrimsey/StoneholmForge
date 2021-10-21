@@ -2,10 +2,13 @@ package net.thegrimsey.stoneholm;
 
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.WorldEvent;
@@ -14,6 +17,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.thegrimsey.stoneholm.processors.NoWaterProcessor;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -28,6 +32,8 @@ public class Stoneholm {
             Stream.of(Biome.BiomeCategory.FOREST, Biome.BiomeCategory.JUNGLE, Biome.BiomeCategory.DESERT, Biome.BiomeCategory.PLAINS, Biome.BiomeCategory.SAVANNA).collect(Collectors.toCollection(HashSet::new));
 
     public static SHConfig CONFIG;
+
+    public static StructureProcessorType<NoWaterProcessor> NOWATER_PROCESSOR = () -> NoWaterProcessor.CODEC;
 
     public Stoneholm() {
         // Register config file.
@@ -55,6 +61,9 @@ public class Stoneholm {
         event.enqueueWork(() -> {
             SHStructures.registerStructureFeatures();
             SHConfiguredStructures.registerConfiguredStructures();
+
+            // Register processors.
+            Registry.register(Registry.STRUCTURE_PROCESSOR, new ResourceLocation(MODID, "nowater_processor"), NOWATER_PROCESSOR);
         });
     }
 

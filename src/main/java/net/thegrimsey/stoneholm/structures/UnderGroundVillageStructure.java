@@ -53,8 +53,6 @@ public class UnderGroundVillageStructure extends StructureFeature<NoneFeatureCon
     }
 
     public static class Start extends StructureStart<NoneFeatureConfiguration> {
-        private static JigsawConfiguration structurePoolFeatureConfig = null;
-
         public Start(StructureFeature<NoneFeatureConfiguration> p_163595_, ChunkPos p_163596_, int p_163597_, long p_163598_) {
             super(p_163595_, p_163596_, p_163597_, p_163598_);
         }
@@ -68,10 +66,18 @@ public class UnderGroundVillageStructure extends StructureFeature<NoneFeatureCon
             // Position, we don't care about Y as we will just be placed on top on the terrain.
             BlockPos blockPos = new BlockPos(x, 0, z);
 
-            if (structurePoolFeatureConfig == null)
-                structurePoolFeatureConfig = new JigsawConfiguration(() -> registryAccess.registry(Registry.TEMPLATE_POOL_REGISTRY).get().get(START_POOL), Stoneholm.CONFIG.VILLAGE_SIZE);
-
-            JigsawPlacement.addPieces(registryAccess, structurePoolFeatureConfig, PoolElementStructurePiece::new, chunkGenerator, structureManager, blockPos, this.pieces, this.random, false, true);
+            JigsawPlacement.addPieces(
+                    registryAccess,
+                    new JigsawConfiguration(() -> registryAccess.registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY).get(START_POOL), Stoneholm.CONFIG.VILLAGE_SIZE),
+                    PoolElementStructurePiece::new,
+                    chunkGenerator,
+                    structureManager,
+                    blockPos,
+                    this,
+                    this.random,
+                    false,
+                    true,
+                    heightAccessor);
 
             //Move structure up 1 block to ensure the entrance doesn't have blocks in front of it.
             this.pieces.forEach(piece -> piece.move(0, 1, 0));

@@ -1,12 +1,11 @@
 {
-  "name": "stoneholm:start_hall",
+  "name": "stoneholm:highways",
   "fallback": "stoneholm:end",
-
   "elements": [
     {
-      "weight": 2,
+      "weight": 5,
       "element": {
-        "location": "stoneholm:hallways/hallway_x",
+        "location": "stoneholm:highways/highway",
         "processors": "stoneholm:decayer",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -15,14 +14,23 @@
     {
       "weight": 1,
       "element": {
-        "location": "stoneholm:poi/llama_stable",
+        "location": "stoneholm:highways/highway_stairs",
         "processors": "stoneholm:decayer",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 1,
+      "weight": 3,
+      "element": {
+        "location": "stoneholm:highways/corner",
+        "processors": "stoneholm:decayer",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 6,
       "element": {
         "location": "stoneholm:hall_to_highway",
         "processors": "stoneholm:decayer",
