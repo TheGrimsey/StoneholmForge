@@ -17,7 +17,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
 
-version = '1.4'
+version = '1.4.1'
 group = 'net.thegrimsey.stoneholm'
 archivesBaseName = 'stoneholm'
 
@@ -110,9 +110,9 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.1-39.0.10'
+    minecraft 'net.minecraftforge:forge:1.18.1-39.0.44'
 
-    api(fg.deobf("me.shedaniel.cloth:cloth-config-forge:6.1.48"))
+    api(fg.deobf("me.shedaniel.cloth:cloth-config-forge:6.1.50"))
 }
 
 // Example for how to get properties into the manifest for reading at runtime.

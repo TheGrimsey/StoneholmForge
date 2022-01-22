@@ -160,7 +160,7 @@ public class StoneholmGenerator {
                 ResourceLocation structureBlockTargetPoolId = new ResourceLocation(structureBlock.nbt.getString("pool"));
                 Optional<StructureTemplatePool>  targetPool = this.registry.getOptional(structureBlockTargetPoolId);
                 if (targetPool.isEmpty() || targetPool.get().size() == 0 && !Objects.equals(structureBlockTargetPoolId, Pools.EMPTY.getRegistryName())) {
-                    LOGGER.warn("Empty or non-existent pool: {}", structureBlockTargetPoolId);
+                    //LOGGER.warn("Empty or non-existent pool: {}", structureBlockTargetPoolId);
                     continue;
                 }
 
@@ -170,7 +170,7 @@ public class StoneholmGenerator {
                 ResourceLocation terminatorPoolId = targetPool.get().getFallback();
                 Optional<StructureTemplatePool> terminatorPool = this.registry.getOptional(terminatorPoolId);
                 if (terminatorPool.isEmpty() || terminatorPool.get().size() == 0 && !Objects.equals(terminatorPoolId, Pools.EMPTY.getRegistryName())) {
-                    LOGGER.warn("Empty or non-existent fallback pool: {}", terminatorPoolId);
+                    //LOGGER.warn("Empty or non-existent fallback pool: {}", terminatorPoolId);
                     continue;
                 }
 

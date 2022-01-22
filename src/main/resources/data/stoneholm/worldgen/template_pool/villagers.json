@@ -1,6 +1,6 @@
 {
   "name": "stoneholm:villagers",
-  "fallback": "minecraft:empty",
+  "fallback": "stoneholm:villagers",
 
   "elements": [
     {
