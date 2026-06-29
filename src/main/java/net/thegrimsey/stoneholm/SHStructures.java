@@ -1,43 +1,31 @@
 package net.thegrimsey.stoneholm;
 
-import com.google.common.collect.ImmutableMap;
-import net.minecraft.data.BuiltinRegistries;
-import net.minecraft.world.level.levelgen.StructureSettings;
-import net.minecraft.world.level.levelgen.feature.StructureFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.level.levelgen.structure.StructureType;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.thegrimsey.stoneholm.structures.DeepslateUnderGroundVillageStructure;
+import net.thegrimsey.stoneholm.structures.NoWaterProcessor;
 import net.thegrimsey.stoneholm.structures.UnderGroundVillageStructure;
-
-import java.util.HashMap;
-import java.util.Map;
+import net.thegrimsey.stoneholm.structures.WindowProcessor;
 
 public class SHStructures {
-    public static final DeferredRegister<StructureFeature<?>> STRUCTURE_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, Stoneholm.MODID);
+    public static final DeferredRegister<StructureType<?>> STRUCTURE_TYPES =
+        DeferredRegister.create(Registries.STRUCTURE_TYPE, Stoneholm.MODID);
 
-    public static final RegistryObject<StructureFeature<JigsawConfiguration>> UNDERGROUND_VILLAGE = STRUCTURE_DEFERRED_REGISTER.register("underground_village", () -> new UnderGroundVillageStructure(JigsawConfiguration.CODEC));
+    public static final DeferredRegister<StructureProcessorType<?>> STRUCTURE_PROCESSORS =
+        DeferredRegister.create(Registries.STRUCTURE_PROCESSOR, Stoneholm.MODID);
 
-    public static void registerStructureFeatures() {
-        StructureFeatureConfiguration structureConfig = new StructureFeatureConfiguration(Stoneholm.CONFIG.VILLAGE_SPACING, Stoneholm.CONFIG.VILLAGE_SEPARATION, 8699777);
-        StructureFeature.STRUCTURES_REGISTRY.put(UNDERGROUND_VILLAGE.get().getRegistryName().toString(), UNDERGROUND_VILLAGE.get());
+    public static final DeferredHolder<StructureType<?>, StructureType<UnderGroundVillageStructure>> UNDERGROUND_VILLAGE =
+        STRUCTURE_TYPES.register("underground_village", () -> () -> UnderGroundVillageStructure.CODEC);
 
-        StructureSettings.DEFAULTS = ImmutableMap.<StructureFeature<?>, StructureFeatureConfiguration>builder()
-                .putAll(StructureSettings.DEFAULTS)
-                .put(UNDERGROUND_VILLAGE.get(), structureConfig)
-                .build();
+    public static final DeferredHolder<StructureType<?>, StructureType<DeepslateUnderGroundVillageStructure>> DEEPSLATE_UNDERGROUND_VILLAGE =
+        STRUCTURE_TYPES.register("deepslate_underground_village", () -> () -> DeepslateUnderGroundVillageStructure.CODEC);
 
-        BuiltinRegistries.NOISE_GENERATOR_SETTINGS.forEach(settings -> {
-            Map<StructureFeature<?>, StructureFeatureConfiguration> structureMap = settings.structureSettings().structureConfig();
+    public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<NoWaterProcessor>> NOWATER_PROCESSOR =
+        STRUCTURE_PROCESSORS.register("nowater_processor", () -> () -> NoWaterProcessor.CODEC);
 
-            if (structureMap instanceof ImmutableMap) {
-                Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap = new HashMap<>(structureMap);
-                tempMap.put(UNDERGROUND_VILLAGE.get(), structureConfig);
-                settings.structureSettings().structureConfig = tempMap;
-            } else {
-                structureMap.put(UNDERGROUND_VILLAGE.get(), structureConfig);
-            }
-        });
-    }
+    public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<WindowProcessor>> WINDOW_PROCESSOR =
+        STRUCTURE_PROCESSORS.register("window_processor", () -> () -> WindowProcessor.CODEC);
 }
