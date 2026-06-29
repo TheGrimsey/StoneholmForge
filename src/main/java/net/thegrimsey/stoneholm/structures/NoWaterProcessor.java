@@ -12,12 +12,20 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 import net.thegrimsey.stoneholm.SHStructures;
 import org.jetbrains.annotations.Nullable;
 
+//? if >=26.2 {
+/*public class NoWaterProcessor implements StructureProcessor {*/
+//?} else {
 public class NoWaterProcessor extends StructureProcessor {
+//?}
     public static final MapCodec<NoWaterProcessor> CODEC = MapCodec.unit(new NoWaterProcessor());
 
     @Nullable
     @Override
+    //? if >=26.2 {
+    /*public StructureTemplate.StructureBlockInfo process(LevelReader world, BlockPos pos, BlockPos pivot, StructureTemplate.StructureBlockInfo structureBlockInfoLocal, StructureTemplate.StructureBlockInfo structureBlockInfoWorld, StructurePlaceSettings data, @Nullable StructureTemplate template) {*/
+    //?} else {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader world, BlockPos pos, BlockPos pivot, StructureTemplate.StructureBlockInfo structureBlockInfoLocal, StructureTemplate.StructureBlockInfo structureBlockInfoWorld, StructurePlaceSettings data) {
+    //?}
         ChunkAccess chunk = world.getChunk(structureBlockInfoWorld.pos());
 
         if (structureBlockInfoWorld.state().hasProperty(BlockStateProperties.WATERLOGGED) && !chunk.getFluidState(structureBlockInfoWorld.pos()).isEmpty()) {
@@ -34,7 +42,13 @@ public class NoWaterProcessor extends StructureProcessor {
     }
 
     @Override
+    //? if >=26.2 {
+    /*public MapCodec<? extends StructureProcessor> codec() {
+        return CODEC;
+    }*/
+    //?} else {
     protected StructureProcessorType<?> getType() {
         return SHStructures.NOWATER_PROCESSOR.get();
     }
+    //?}
 }

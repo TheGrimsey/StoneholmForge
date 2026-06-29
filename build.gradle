@@ -11,11 +11,22 @@ group = project.maven_group
 base.archivesName = project.archives_base_name
 
 repositories {
-    maven { url "https://maven.shedaniel.me/" }
 }
 
 neoForge {
     version = project.neoforge_version
+
+    mods {
+        stoneholm {
+            sourceSet(sourceSets.main)
+        }
+    }
+
+    runs {
+        client {
+            client()
+        }
+    }
 }
 
 // Add theme names here to generate a full pool directory from stone_bricks/.
@@ -50,23 +61,18 @@ processResources.dependsOn generateThemePools
 tasks.matching { it.name == 'sourcesJar' }.configureEach { dependsOn generateThemePools }
 
 processResources {
-    def cloth_major = (project.cloth_config_version =~ /^(\d+)/)[0][1]
-
     inputs.property "version", project.version
     inputs.property "mc_version", mc_version
     inputs.property "neoforge_version", project.neoforge_version
-    inputs.property "cloth_config_major", cloth_major
 
-    filesMatching("META-INF/mods.toml") {
+    filesMatching("META-INF/neoforge.mods.toml") {
         expand "version": project.version,
                "mc_version": mc_version,
-               "neoforge_version": project.neoforge_version,
-               "cloth_config_major": cloth_major
+               "neoforge_version": project.neoforge_version
     }
 }
 
 dependencies {
-    implementation("me.shedaniel.cloth:cloth-config-neoforge:${project.cloth_config_version}")
 }
 
 tasks.withType(JavaCompile).configureEach {

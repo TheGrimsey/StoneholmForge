@@ -35,8 +35,8 @@
               "count": { "min": 1.0, "max": 3.0, "type": "minecraft:uniform" }
             },
             {
-              "function": "minecraft:set_nbt",
-              "tag": "{Potion:\"minecraft:slow_falling\"}"
+              "function": "minecraft:set_potion",
+              "id": "minecraft:slow_falling"
             }
           ],
           "name": "minecraft:tipped_arrow"
@@ -50,8 +50,8 @@
               "count": { "min": 1.0, "max": 3.0, "type": "minecraft:uniform" }
             },
             {
-              "function": "minecraft:set_nbt",
-              "tag": "{Potion:\"minecraft:night_vision\"}"
+              "function": "minecraft:set_potion",
+              "id": "minecraft:night_vision"
             }
           ],
           "name": "minecraft:tipped_arrow"
@@ -65,8 +65,8 @@
               "count": { "min": 1.0, "max": 3.0, "type": "minecraft:uniform" }
             },
             {
-              "function": "minecraft:set_nbt",
-              "tag": "{Potion:\"minecraft:regeneration\"}"
+              "function": "minecraft:set_potion",
+              "id": "minecraft:regeneration"
             }
           ],
           "name": "minecraft:tipped_arrow"

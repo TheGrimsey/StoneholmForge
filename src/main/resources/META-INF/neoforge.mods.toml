@@ -24,12 +24,6 @@ logoFile="assets/stoneholm/icon.png"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.stoneholm]]
-    modId="cloth_config"
-    type="required"
-    versionRange="[${cloth_config_major},)"
-    ordering="NONE"
-    side="BOTH"
 
 [[mixins]]
 config="stoneholm.mixins.json"

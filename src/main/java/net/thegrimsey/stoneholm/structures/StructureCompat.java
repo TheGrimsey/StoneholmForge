@@ -1,7 +1,11 @@
 package net.thegrimsey.stoneholm.structures;
 
 import net.minecraft.core.BlockPos;
+//? if >=26.1 {
+/*import net.minecraft.resources.Identifier;*/
+//?} else {
 import net.minecraft.resources.ResourceLocation;
+//?}
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.PoolElementStructurePiece;
@@ -21,7 +25,9 @@ public class StructureCompat {
     public static BlockState getState(StructureTemplate.StructureBlockInfo info) { return info.state(); }
     //?}
 
-    //? if >=1.21.10 {
+    //? if >=26.1 {
+    /*public static Identifier getPoolId(StructureTemplate.JigsawBlockInfo info) { return info.pool().identifier(); }*/
+    //?} else if >=1.21.10 {
     /*public static ResourceLocation getPoolId(StructureTemplate.JigsawBlockInfo info) { return info.pool().location(); }*/
     //?} else if >=1.21.4 {
     /*public static ResourceLocation getPoolId(StructureTemplate.JigsawBlockInfo info) { return info.pool(); }*/

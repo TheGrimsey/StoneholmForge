@@ -13,13 +13,25 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 import net.thegrimsey.stoneholm.SHStructures;
 import org.jetbrains.annotations.Nullable;
 
+//? if >=26.2 {
+/*public class WindowProcessor implements StructureProcessor {*/
+//?} else {
 public class WindowProcessor extends StructureProcessor {
+//?}
     public static final MapCodec<WindowProcessor> CODEC = MapCodec.unit(new WindowProcessor());
 
     @Nullable
     @Override
+    //? if >=26.2 {
+    /*public StructureTemplate.StructureBlockInfo process(LevelReader world, BlockPos pos, BlockPos pivot, StructureTemplate.StructureBlockInfo structureBlockInfoLocal, StructureTemplate.StructureBlockInfo structureBlockInfoWorld, StructurePlaceSettings data, @Nullable StructureTemplate template) {*/
+    //?} else {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader world, BlockPos pos, BlockPos pivot, StructureTemplate.StructureBlockInfo structureBlockInfoLocal, StructureTemplate.StructureBlockInfo structureBlockInfoWorld, StructurePlaceSettings data) {
+    //?}
+        //? if >=26.2 {
+        /*if (structureBlockInfoLocal.state().is(Blocks.CONCRETE.pink())) {*/
+        //?} else {
         if (structureBlockInfoLocal.state().is(Blocks.PINK_CONCRETE)) {
+        //?}
             BlockPos worldPos = structureBlockInfoWorld.pos();
             ChunkAccess chunk = world.getChunk(worldPos);
 
@@ -41,7 +53,13 @@ public class WindowProcessor extends StructureProcessor {
     }
 
     @Override
+    //? if >=26.2 {
+    /*public MapCodec<? extends StructureProcessor> codec() {
+        return CODEC;
+    }*/
+    //?} else {
     protected StructureProcessorType<?> getType() {
         return SHStructures.WINDOW_PROCESSOR.get();
     }
+    //?}
 }

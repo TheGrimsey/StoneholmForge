@@ -7,7 +7,11 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
+//? if >=26.1 {
+/*import net.minecraft.resources.Identifier;*/
+//?} else {
 import net.minecraft.resources.ResourceLocation;
+//?}
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.chunk.ChunkGenerator;
@@ -40,64 +44,124 @@ import java.util.*;
 public class StoneholmGenerator {
     static final Logger LOGGER = LogManager.getLogger();
 
+    //? if >=26.1 {
+    /*static final Identifier[] WALL_LIGHTING_POOLS = {*/
+    //?} else {
     static final ResourceLocation[] WALL_LIGHTING_POOLS = {
+    //?}
         Stoneholm.id("wall_lighting_lantern"),
         Stoneholm.id("wall_lighting_torch"),
     };
 
+    //? if >=26.1 {
+    /*static final Identifier[] CORRIDORS = {*/
+    //?} else {
     static final ResourceLocation[] CORRIDORS = {
+    //?}
         Stoneholm.id("stone_bricks/corridors"),
         Stoneholm.id("deepslate/corridors")
     };
+    //? if >=26.1 {
+    /*static final Identifier[] FUSILAGE = {*/
+    //?} else {
     static final ResourceLocation[] FUSILAGE = {
+    //?}
         Stoneholm.id("stone_bricks/fusilage"),
         Stoneholm.id("deepslate/fusilage")
     };
+    //? if >=26.1 {
+    /*static final Identifier[] CISTERN_FUSILAGE = {*/
+    //?} else {
     static final ResourceLocation[] CISTERN_FUSILAGE = {
+    //?}
         Stoneholm.id("stone_bricks/cistern_fusilage"),
         Stoneholm.id("deepslate/cistern_fusilage")
     };
+    //? if >=26.1 {
+    /*static final Identifier[] CISTERN = {*/
+    //?} else {
     static final ResourceLocation[] CISTERN = {
+    //?}
         Stoneholm.id("stone_bricks/cistern"),
         Stoneholm.id("deepslate/cistern")
     };
+    //? if >=26.1 {
+    /*static final Identifier[] BEDROOM = {*/
+    //?} else {
     static final ResourceLocation[] BEDROOM = {
+    //?}
         Stoneholm.id("stone_bricks/bedroom"),
         Stoneholm.id("deepslate/bedroom")
     };
+    //? if >=26.1 {
+    /*static final Identifier[] COURTYARD = {*/
+    //?} else {
     static final ResourceLocation[] COURTYARD = {
+    //?}
         Stoneholm.id("stone_bricks/courtyard"),
         Stoneholm.id("deepslate/courtyard")
     };
+    //? if >=26.1 {
+    /*static final Identifier[] JOB = {*/
+    //?} else {
     static final ResourceLocation[] JOB = {
+    //?}
         Stoneholm.id("stone_bricks/job"),
         Stoneholm.id("deepslate/job")
     };
+    //? if >=26.1 {
+    /*static final Identifier[] EASTER_EGGS = {*/
+    //?} else {
     static final ResourceLocation[] EASTER_EGGS = {
+    //?}
         Stoneholm.id("stone_bricks/easter_eggs"),
         Stoneholm.id("deepslate/easter_eggs")
     };
+    //? if >=26.1 {
+    /*static final Identifier[] STAIRS = {*/
+    //?} else {
     static final ResourceLocation[] STAIRS = {
+    //?}
         Stoneholm.id("stone_bricks/stairs"),
         Stoneholm.id("deepslate/stairs")
     };
+    //? if >=26.1 {
+    /*static final Identifier[] STAIRS_START = {*/
+    //?} else {
     static final ResourceLocation[] STAIRS_START = {
+    //?}
         Stoneholm.id("stone_bricks/stairs_start"),
         Stoneholm.id("deepslate/stairs_start")
     };
+    //? if >=26.1 {
+    /*static final Identifier[] STAIRS_END = {*/
+    //?} else {
     static final ResourceLocation[] STAIRS_END = {
+    //?}
         Stoneholm.id("stone_bricks/stairs_end"),
         Stoneholm.id("deepslate/stairs_end")
     };
+    //? if >=26.1 {
+    /*static final Identifier[] CLUTTER = {*/
+    //?} else {
     static final ResourceLocation[] CLUTTER = {
+    //?}
         Stoneholm.id("stone_bricks/clutter"),
         Stoneholm.id("deepslate/clutter")
     };
+    //? if >=26.1 {
+    /*static final Identifier[] END_CAP = {*/
+    //?} else {
     static final ResourceLocation[] END_CAP = {
+    //?}
         Stoneholm.id("stone_bricks/end_cap"),
         Stoneholm.id("deepslate/end_cap")
     };
+    //? if >=26.1 {
+    /*static final Identifier[] START_POOLS = {*/
+    //?} else {
     static final ResourceLocation[] START_POOLS = {
+    //?}
         Stoneholm.id("stone_bricks/start_pool"),
         Stoneholm.id("deepslate/start_pool")
     };
@@ -105,7 +169,7 @@ public class StoneholmGenerator {
     static final double EXTENTS = 64.0;
 
     public static Optional<Structure.GenerationStub> generate(Structure.GenerationContext inContext, BlockPos pos, BlockSet blockSet) {
-        int size = Stoneholm.CONFIG.VILLAGE_SIZE;
+        int size = Stoneholm.VILLAGE_SIZE;
         if (size <= 0)
             return Optional.empty();
 
@@ -117,7 +181,11 @@ public class StoneholmGenerator {
         StructureTemplatePool structurePool = registry.getOptional(START_POOLS[blockSet.id]).orElse(null);
 
         WorldgenRandom chunkRandom = new WorldgenRandom(inContext.random());
+        //? if >=26.1 {
+        /*chunkRandom.setLargeFeatureSeed(inContext.seed(), inContext.chunkPos().x(), inContext.chunkPos().z());*/
+        //?} else {
         chunkRandom.setLargeFeatureSeed(inContext.seed(), inContext.chunkPos().x, inContext.chunkPos().z);
+        //?}
 
         StructurePoolElement startingElement = structurePool.getRandomTemplate(chunkRandom);
         if (startingElement == EmptyPoolElement.INSTANCE)
@@ -199,7 +267,11 @@ public class StoneholmGenerator {
         int yieldedJobs = 0;
         int yieldedRooms = 0;
 
+        //? if >=26.1 {
+        /*static final HashSet<Identifier> terrainCheckIgnoredPools;*/
+        //?} else {
         static final HashSet<ResourceLocation> terrainCheckIgnoredPools;
+        //?}
         static {
             String[] base = { "bee", "deco_blocks", "deco_coverings", "deco_wallpapers", "iron_golem", "villagers", "armor_stands", "corridors", "clutter" };
             String[] themes = { "stone_bricks", "deepslate" };
@@ -212,6 +284,16 @@ public class StoneholmGenerator {
             }
         }
 
+        //? if >=26.1 {
+        /*static final Identifier WALL_LIGHTING = Stoneholm.id("wall_lighting");
+        static final Identifier CONNECTORS = Stoneholm.id("connectors");
+        static final Identifier STAIRS_ID = Stoneholm.id("stairs");
+        static final Identifier STAIRS_START_ID = Stoneholm.id("stairs_start");
+
+        static final Identifier CISTERN_ID = Stoneholm.id("cistern");
+        static final Identifier CISTERN_FUSILAGE_ID = Stoneholm.id("cistern_fusilage");
+        static final Identifier CLUTTER_ID = Stoneholm.id("clutter");*/
+        //?} else {
         static final ResourceLocation WALL_LIGHTING = Stoneholm.id("wall_lighting");
         static final ResourceLocation CONNECTORS = Stoneholm.id("connectors");
         static final ResourceLocation STAIRS_ID = Stoneholm.id("stairs");
@@ -220,8 +302,13 @@ public class StoneholmGenerator {
         static final ResourceLocation CISTERN_ID = Stoneholm.id("cistern");
         static final ResourceLocation CISTERN_FUSILAGE_ID = Stoneholm.id("cistern_fusilage");
         static final ResourceLocation CLUTTER_ID = Stoneholm.id("clutter");
+        //?}
 
+        //? if >=26.1 {
+        /*static final HashSet<Identifier> NO_FUSILAGE = new HashSet<>(Arrays.asList(*/
+        //?} else {
         static final HashSet<ResourceLocation> NO_FUSILAGE = new HashSet<>(Arrays.asList(
+        //?}
             WALL_LIGHTING,
             Stoneholm.id("misc_room"),
             Stoneholm.id("villager"),
@@ -258,7 +345,11 @@ public class StoneholmGenerator {
             fallback_side = end_cap;
         }
 
+        //? if >=26.1 {
+        /*Optional<StructureTemplatePool> getPool(Identifier id, ChunkGenerator chunkGenerator, LevelHeightAccessor world, RandomState randomState, BlockPos sourceConnector) {*/
+        //?} else {
         Optional<StructureTemplatePool> getPool(ResourceLocation id, ChunkGenerator chunkGenerator, LevelHeightAccessor world, RandomState randomState, BlockPos sourceConnector) {
+        //?}
             if (id.equals(WALL_LIGHTING)) {
                 return Optional.of(wall_lighting);
             } else if (id.equals(CONNECTORS)) {
@@ -324,7 +415,7 @@ public class StoneholmGenerator {
                 BlockPos structureBlockPosition = StructureCompat.getPos(structureBlock);
                 if (sourceBlock.equals(structureBlockPosition))
                     continue;
-                ResourceLocation structureBlockTargetPoolId = StructureCompat.getPoolId(structureBlock);
+                var structureBlockTargetPoolId = StructureCompat.getPoolId(structureBlock);
                 boolean noFusilage = NO_FUSILAGE.contains(structureBlockTargetPoolId);
                 int offset = noFusilage ? 1 : 2;
 
@@ -333,7 +424,11 @@ public class StoneholmGenerator {
                 BlockPos structureBlockAimPosition = structureBlockPosition.relative(structureBlockFaceDirection, offset);
 
                 Optional<StructureTemplatePool> targetPool = this.getPool(structureBlockTargetPoolId, chunkGenerator, world, randomState, structureBlockPosition);
+                //? if >=26.1 {
+                /*if (targetPool.isEmpty() || targetPool.get().size() == 0 && !Objects.equals(structureBlockTargetPoolId, Pools.EMPTY.identifier())) {*/
+                //?} else {
                 if (targetPool.isEmpty() || targetPool.get().size() == 0 && !Objects.equals(structureBlockTargetPoolId, Pools.EMPTY.location())) {
+                //?}
                     LOGGER.warn("Empty or non-existent pool: {}", structureBlockTargetPoolId);
                     continue;
                 }
@@ -343,7 +438,11 @@ public class StoneholmGenerator {
                 Holder<StructureTemplatePool> entry = targetPool.get().getFallback();
                 StructureTemplatePool fallbackPool = entry.value();
                 if (fallbackPool.size() == 0 && !entry.is(Pools.EMPTY)) {
+                    //? if >=26.1 {
+                    /*LOGGER.warn("Empty or non-existent fallback pool: {}", entry.unwrapKey().get().identifier());*/
+                    //?} else {
                     LOGGER.warn("Empty or non-existent fallback pool: {}", entry.unwrapKey().get().location());
+                    //?}
                     continue;
                 }
 

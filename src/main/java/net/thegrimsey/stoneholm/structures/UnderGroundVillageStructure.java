@@ -43,12 +43,39 @@ public class UnderGroundVillageStructure extends Structure {
 
     @Override
     public Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
+        //? if >=26.1 {
+        /*int x = context.chunkPos().x() << 4;
+        int z = context.chunkPos().z() << 4;*/
+        //?} else {
         int x = context.chunkPos().x << 4;
         int z = context.chunkPos().z << 4;
+        //?}
         BlockPos blockPos = new BlockPos(x, 0, z);
         return StoneholmGenerator.generate(context, blockPos, BlockSet.STONE_BRICKS);
     }
 
+    //? if >=26.2 {
+    /*static final net.minecraft.world.level.block.Block[] BARS = {
+        Blocks.IRON_BARS,
+        Blocks.GLASS_PANE,
+        Blocks.STAINED_GLASS_PANE.white(),
+        Blocks.STAINED_GLASS_PANE.orange(),
+        Blocks.STAINED_GLASS_PANE.magenta(),
+        Blocks.STAINED_GLASS_PANE.lightBlue(),
+        Blocks.STAINED_GLASS_PANE.yellow(),
+        Blocks.STAINED_GLASS_PANE.lime(),
+        Blocks.STAINED_GLASS_PANE.pink(),
+        Blocks.STAINED_GLASS_PANE.gray(),
+        Blocks.STAINED_GLASS_PANE.lightGray(),
+        Blocks.STAINED_GLASS_PANE.cyan(),
+        Blocks.STAINED_GLASS_PANE.purple(),
+        Blocks.STAINED_GLASS_PANE.blue(),
+        Blocks.STAINED_GLASS_PANE.brown(),
+        Blocks.STAINED_GLASS_PANE.green(),
+        Blocks.STAINED_GLASS_PANE.red(),
+        Blocks.STAINED_GLASS_PANE.black(),
+    };*/
+    //?} else {
     static final net.minecraft.world.level.block.Block[] BARS = {
         Blocks.IRON_BARS,
         Blocks.GLASS_PANE,
@@ -69,6 +96,7 @@ public class UnderGroundVillageStructure extends Structure {
         Blocks.RED_STAINED_GLASS_PANE,
         Blocks.BLACK_STAINED_GLASS_PANE,
     };
+    //?}
 
     @Override
     public void afterPlace(WorldGenLevel world, StructureManager structureManager, ChunkGenerator chunkGenerator, RandomSource random, BoundingBox box, ChunkPos chunkPos, PiecesContainer pieces) {
@@ -83,7 +111,11 @@ public class UnderGroundVillageStructure extends Structure {
                     for (int z = boundingBox.minZ(); z <= boundingBox.maxZ(); z++) {
                         blockPos.set(x, y, z);
                         BlockState blockState = world.getBlockState(blockPos);
+                        //? if >=26.2 {
+                        /*if (blockState.is(Blocks.CONCRETE.pink())) {*/
+                        //?} else {
                         if (blockState.is(Blocks.PINK_CONCRETE)) {
+                        //?}
                             if (
                                 world.getBlockState(blockPos.relative(Direction.NORTH)).isAir() && world.getBlockState(blockPos.relative(Direction.SOUTH)).isAir()
                                     || world.getBlockState(blockPos.relative(Direction.EAST)).isAir() && world.getBlockState(blockPos.relative(Direction.WEST)).isAir()

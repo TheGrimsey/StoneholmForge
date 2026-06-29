@@ -17,8 +17,13 @@ public class DeepslateUnderGroundVillageStructure extends UnderGroundVillageStru
 
     @Override
     public Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
+        //? if >=26.1 {
+        /*int x = context.chunkPos().x() << 4;
+        int z = context.chunkPos().z() << 4;*/
+        //?} else {
         int x = context.chunkPos().x << 4;
         int z = context.chunkPos().z << 4;
+        //?}
         return StoneholmGenerator.generate(context, new BlockPos(x, 0, z), BlockSet.DEEPSLATE);
     }
 

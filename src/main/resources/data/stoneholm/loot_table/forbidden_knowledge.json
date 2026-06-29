@@ -45,8 +45,8 @@
           "name": "minecraft:potion",
           "functions": [
             {
-              "function": "minecraft:set_nbt",
-              "tag": "{Potion:\"minecraft:strong_strength\"}"
+              "function": "minecraft:set_potion",
+              "id": "minecraft:strong_strength"
             }
           ]
         },
@@ -56,8 +56,8 @@
           "name": "minecraft:potion",
           "functions": [
             {
-              "function": "minecraft:set_nbt",
-              "tag": "{Potion:\"minecraft:slow_falling\"}"
+              "function": "minecraft:set_potion",
+              "id": "minecraft:slow_falling"
             }
           ]
         },
@@ -67,21 +67,10 @@
           "name": "minecraft:potion",
           "functions": [
             {
-              "function": "minecraft:set_nbt",
-              "tag": "{Potion:\"minecraft:luck\"}"
+              "function": "minecraft:set_potion",
+              "id": "minecraft:luck"
             }
           ]
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 2,
-          "functions": [
-            {
-              "function": "minecraft:set_nbt",
-              "tag": "{author:\"Unknown\",title:\"Forbidden Rites\",pages:[\"{\\\"text\\\":\\\"The village was built to endure. To outlast the sun itself. We carved our halls into the stone so that no storm, no siege, no age of man could unmake us.\\\"}\",\"{\\\"text\\\":\\\"But the stone remembers what we have done here. Do not read further.\\\"}\"]}"
-            }
-          ],
-          "name": "minecraft:written_book"
         }
       ]
     },

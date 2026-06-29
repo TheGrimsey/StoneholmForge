@@ -1,10 +1,12 @@
 package net.thegrimsey.stoneholm;
 
-import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
+//? if >=26.1 {
+/*import net.minecraft.resources.Identifier;*/
+//?} else {
 import net.minecraft.resources.ResourceLocation;
+//?}
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
@@ -16,9 +18,17 @@ import net.thegrimsey.stoneholm.util.StructurePoolUtils;
 @Mod(Stoneholm.MODID)
 public class Stoneholm {
     public static final String MODID = "stoneholm";
+    //? if >=26.1 {
+    /*public static final Identifier UNDERGROUNDVILLAGE_IDENTIFIER = id("underground_village");*/
+    //?} else {
     public static final ResourceLocation UNDERGROUNDVILLAGE_IDENTIFIER = id("underground_village");
-    public static SHConfig CONFIG;
+    //?}
+    public static final int VILLAGE_SIZE = 25;
 
+    //? if >=26.1 {
+    /*public static Identifier id(String path) { return Identifier.fromNamespaceAndPath(MODID, path); }
+    public static Identifier parseId(String id) { return Identifier.parse(id); }*/
+    //?} else {
     public static ResourceLocation id(String path) {
         return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
@@ -26,13 +36,11 @@ public class Stoneholm {
     public static ResourceLocation parseId(String id) {
         return ResourceLocation.parse(id);
     }
+    //?}
 
     public Stoneholm(IEventBus modEventBus) {
         SHStructures.STRUCTURE_TYPES.register(modEventBus);
         SHStructures.STRUCTURE_PROCESSORS.register(modEventBus);
-
-        AutoConfig.register(SHConfig.class, JanksonConfigSerializer::new);
-        CONFIG = AutoConfig.getConfigHolder(SHConfig.class).getConfig();
 
         NeoForge.EVENT_BUS.addListener(this::onServerStarting);
     }
