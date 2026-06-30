@@ -43,6 +43,8 @@ jobs:
       - name: Publish to CurseForge
         uses: Kir-Antipov/mc-publish@v3.3
         with:
+          modrinth-id: ${{ secrets.MODRINTH_PROJECT_ID }}
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           curseforge-id: ${{ secrets.CURSEFORGE_PROJECT_ID }}
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
           files: versions/${{ matrix.mc_version }}/build/libs/!(*-@(sources|dev)).jar
